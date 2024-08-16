@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	// Load local config file in DEV environment
+	// Load local config file in DEV environment as
 	if os.Getenv("ENV") != "PROD" {
 		godotenv.Load("config.env")
 	}
