@@ -52,7 +52,8 @@ export default async function performRequest<T>(
 
   // Store user email and password on userMe fetch
   if (path === ServerEndpoints.userMe()) {
-    storeUserEmailAndPassword(serverResponseBody.data as User);
+    const userPassword = (serverResponseBody.data as User).password;
+    storeUserPassword(userPassword);
   }
 
   // Return received data
@@ -61,7 +62,6 @@ export default async function performRequest<T>(
 
 export function performLogOut() {
   localStorage.setItem("Bearer-Token", "");
-  localStorage.setItem("email", "");
   localStorage.setItem("password", "");
 }
 
@@ -75,22 +75,17 @@ function retreiveAuthToken(): string {
   return localStorage.getItem("Bearer-Token") || "";
 }
 
-function storeUserEmailAndPassword(user: User) {
-  localStorage.setItem("email", user.email);
-  localStorage.setItem("password", user.password);
+function storeUserPassword(password: string) {
+  localStorage.setItem("password", password);
 }
 
-function retreiveUserEmailAndPassword(): string[] {
-  const email = localStorage.getItem("email") || "";
-  const password = localStorage.getItem("password") || "";
-  return [email, password];
+function retreivePassword(): string {
+  return localStorage.getItem("password") || "";
 }
 
 async function refreshAuthToken() {
-  const [email, password] = retreiveUserEmailAndPassword();
   const userData = {
-    email: email,
-    password: password,
+    password: retreivePassword(),
   };
   try {
     await performRequest(
