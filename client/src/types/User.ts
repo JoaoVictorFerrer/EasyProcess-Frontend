@@ -7,7 +7,6 @@ export type User = {
   role: string;
   createdAt: Date;
   updatedAt: Date;
-  processes: string[];
 };
 
 export enum UserRoles {
