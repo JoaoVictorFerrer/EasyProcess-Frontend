@@ -57,7 +57,11 @@ export default async function performRequest<T>(
   }
 
   // Return received data
-  return serverResponseBody.data;
+  const data : BaseServerResponse = {
+    data: serverResponseBody.data,
+    hearderStatus: response.ok
+  }
+  return data;
 }
 
 export function performLogOut() {

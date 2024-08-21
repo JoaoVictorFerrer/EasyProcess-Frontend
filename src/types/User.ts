@@ -14,3 +14,4 @@ export enum UserRoles {
   Gestor = "Gestor",
   Secretaria = "Secretaria",
 }
+

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 export enum HTTPMethod {
   POST = "POST",
   GET = "GET",
@@ -17,10 +17,13 @@ export enum InternalServerError {
 
 export type BaseServerResponse<T> = {
   data: T | null;
+  hearderStatus: boolean;
   error: boolean;
   errorText: string | null;
   internalErrorCode: number;
 };
+
+
 
 export class FetchError extends Error {
   message: string;
